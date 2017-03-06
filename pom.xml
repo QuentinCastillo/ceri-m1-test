@@ -1,0 +1,18 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0">
+	<dependencies>
+		<dependency>
+		<groupId>junit</groupId>
+		<artifactId>junit</artifactId>
+		<version>4.12</version>
+	</dependency>
+	<dependency>
+	    <groupId>info.solidsoft.mockito</groupId>
+	    <artifactId>mockito-java8</artifactId>
+	    <version>2.0.1</version>
+	</dependency>
+</dependencies>
+<modelVersion>4.0.0</modelVersion>
+<groupId>authority</groupId>
+<artifactId>Poketin</artifactId>
+<version>0.0.0</version>
+</project>
