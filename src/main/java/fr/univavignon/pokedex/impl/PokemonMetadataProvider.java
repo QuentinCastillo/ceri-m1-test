@@ -15,11 +15,19 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+/**
+ * Created by klovelace on 4/5/17.
+ * PROJECT: pokedex
+ * PACKAGE: fr.univavignon.pokedex.api
+ */
 
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
 
     private JsonArray data = null;
 
+    /**
+     * {@inheritDoc}
+     **/
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
         if (this.data == null)
@@ -29,7 +37,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
         try {
             pokemon = data.get(index).getAsJsonObject();
         } catch(IndexOutOfBoundsException e) {
-            throw new PokedexException("Le professeur Castillo déclare que ce Pokemon est inconnu !");
+            throw new PokedexException("No Pokemon at this index!");
         }
 
         return new PokemonMetadata(
@@ -45,6 +53,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
         HttpURLConnection request = null;
         URL url = null;
 
+        // Connect to the URL using java's native library
         try {
             String url1 = "https://raw.githubusercontent.com/PokemonGoF/PokemonGo-Bot/master/data/pokemon.json";
             url = new URL(url1);
@@ -62,7 +71,8 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
             e.printStackTrace();
         }
 
-        JsonParser jp = new JsonParser();
+        // Convert to a JSON object to get data
+        JsonParser jp = new JsonParser(); //from gson
         JsonElement root = null;
         try {
             root = jp.parse(new InputStreamReader((InputStream) request.getContent()));

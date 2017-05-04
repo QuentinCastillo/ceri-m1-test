@@ -3,7 +3,7 @@ package fr.univavignon.pokedex.api;
 /**
  * An IPokemonMetadataProvider aims to provide PokemonMetadata
  * for a given pokemon index.
- * 
+ * Search resource online if not local
  * @author fv
  */
 public interface IPokemonMetadataProvider {

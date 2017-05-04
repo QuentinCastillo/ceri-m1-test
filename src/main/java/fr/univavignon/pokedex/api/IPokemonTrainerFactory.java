@@ -2,7 +2,7 @@ package fr.univavignon.pokedex.api;
 
 /**
  * Factory interface for class that aims to create PokemonTrainer instance.
- * 
+ * Check if serialized trainer exists first
  * @author fv
  */
 public interface IPokemonTrainerFactory {

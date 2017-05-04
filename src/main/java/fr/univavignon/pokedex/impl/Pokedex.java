@@ -8,10 +8,17 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
+/**
+ * Created by klovelace on 4/30/17.
+ * PROJECT: pokedex
+ * PACKAGE: fr.univavignon.pokedex.impl
+ */
+
 public class Pokedex implements IPokedex, Serializable {
     private List<Pokemon> list;
     private transient IPokemonMetadataProvider metadataProvider;
     private transient IPokemonFactory pokemonFactory;
+
     Pokedex() {
         try {
             this.read();
@@ -22,23 +29,28 @@ public class Pokedex implements IPokedex, Serializable {
             this.pokemonFactory = null;
         }
     }
+
     Pokedex(IPokemonMetadataProvider metadataProvider, IPokemonFactory pokemonFactory) {
         this();
         this.metadataProvider = metadataProvider;
         this.pokemonFactory = pokemonFactory;
     }
+
     @Override
     public int size() {
         return this.list.size();
     }
+
     @Override
     public int addPokemon(Pokemon pokemon) {
         this.list.add(pokemon);
         this.save();
         return this.list.size() - 1;
     }
+
     private void save() {
         ObjectOutputStream oos = null;
+
         try {
             oos = new ObjectOutputStream(new FileOutputStream("Pokedex.ser"));
             oos.writeObject(this);

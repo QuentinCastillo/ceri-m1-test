@@ -2,7 +2,7 @@ package fr.univavignon.pokedex.api;
 
 /**
  * Factory interface for class that aims to create Pokemon instance.
- * 
+ * Get ivs from the web
  * @author fv
  */
 public interface IPokemonFactory {

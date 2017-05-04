@@ -11,21 +11,31 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 
+/**
+ * Created by klovelace on 4/24/17.
+ * PROJECT: pokedex
+ * PACKAGE: fr.univavignon.pokedex.impl
+ */
 
 public class PokemonFactory implements IPokemonFactory {
     private final String base_url = "https://pokemon.gameinfo.io/en/tools/iv-calculator";
     private final String USER_AGENT = "Mozilla/5.0";
+
+    /**
+     * {@inheritDoc}
+     **/
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
         JsonObject jsonObject = null;
-        try
-		{
-            jsonObject = recupStats(index + 1, cp, dust);
+        try {
+            jsonObject = getStats(index + 1, cp, dust);
         } catch (Exception e) {
             e.printStackTrace();
         }
-  
+
+        System.out.println(jsonObject.toString());
         JsonArray stats = jsonObject.get("stats").getAsJsonArray();
+
         return new Pokemon( index,
                 jsonObject.get("pokemon").getAsJsonArray().get(0).toString().replace("\"", ""),
                 stats.get(1).getAsInt(),
@@ -39,7 +49,7 @@ public class PokemonFactory implements IPokemonFactory {
                 );
     }
 
- private JsonObject recupStats(int index, int cp, int dust) throws Exception {
+    private JsonObject getStats(int index, int cp, int dust) throws Exception {
         String urlParameters = "p=" + index +
                 "&dust%5B%5D=" + dust +
                 "&ct=true" +

@@ -6,6 +6,7 @@ import java.util.List;
 /**
  * IPokedex interface. An IPokedex aims to store all information about
  * captured pokemon, as their default metadata as well.
+ * Save on disk (trainer)on change
  * 
  * @author fv
  */
