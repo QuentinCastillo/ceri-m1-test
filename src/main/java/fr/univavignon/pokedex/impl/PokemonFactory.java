@@ -39,8 +39,44 @@ public class PokemonFactory implements IPokemonFactory {
                 );
     }
 
-    private JsonObject recupStats(int index, int cp, int dust) throws Exception {
-        // TODO
-		return null;
+ private JsonObject getStats(int index, int cp, int dust) throws Exception {
+        String urlParameters = "p=" + index +
+                "&dust%5B%5D=" + dust +
+                "&ct=true" +
+                "&ev=false" +
+                "&cp%5B%5D=" + cp +
+                "&v=3";
+        URL obj = new URL(base_url);
+        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
+
+        //add reuqest header
+        con.setRequestMethod("POST");
+        con.setRequestProperty("User-Agent", USER_AGENT);
+        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
+
+        // Send post request
+        con.setDoOutput(true);
+        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
+        wr.writeBytes(urlParameters);
+        wr.flush();
+        wr.close();
+
+        int responseCode = con.getResponseCode();
+        System.out.println("\nSending 'POST' request to URL : " + base_url);
+        System.out.println("Post parameters : " + urlParameters);
+        System.out.println("Response Code : " + responseCode);
+
+        JsonParser jp = new JsonParser();
+        JsonElement root = null;
+
+        try {
+            root = jp.parse(new InputStreamReader(con.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        //print result
+        return root.getAsJsonObject();
+
     }
 }
