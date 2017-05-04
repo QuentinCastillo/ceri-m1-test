@@ -39,7 +39,7 @@ public class PokemonFactory implements IPokemonFactory {
                 );
     }
 
- private JsonObject getStats(int index, int cp, int dust) throws Exception {
+ private JsonObject recupStats(int index, int cp, int dust) throws Exception {
         String urlParameters = "p=" + index +
                 "&dust%5B%5D=" + dust +
                 "&ct=true" +
