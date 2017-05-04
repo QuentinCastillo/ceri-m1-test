@@ -62,7 +62,7 @@ public class IPokedexTest {
         when(pokedex.addPokemon(any())).then(i -> pokedex_size[0]++);
 
         when(pokedex.getPokemon(0)).thenReturn(bulbizarre);
-        when(pokedex.getPokemon(1)).thenThrow(new PokedexException("Invalid index"));
+        when(pokedex.getPokemon(1)).thenThrow(new PokedexException("MISSINGNO"));
 
         List<Pokemon> list1 = new ArrayList<>();
         List<Pokemon> list2 = new ArrayList<>();
@@ -98,7 +98,7 @@ public class IPokedexTest {
             pokedex.getPokemon(1);
             fail("Expected a PokedexException to be thrown");
         } catch (PokedexException e) {
-            assertEquals("Invalid index", e.getMessage());
+            assertEquals("MISSINGNO", e.getMessage());
         }
     }
 

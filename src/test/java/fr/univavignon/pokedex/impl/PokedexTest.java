@@ -10,11 +10,6 @@ import java.io.File;
 
 import static junit.framework.TestCase.assertEquals;
 
-/**
- * Created by klovelace on 4/30/17.
- * PROJECT: pokedex
- * PACKAGE: fr.univavignon.pokedex.impl
- */
 
 public class PokedexTest extends IPokedexTest {
     @Before
