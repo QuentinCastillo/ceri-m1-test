@@ -20,11 +20,11 @@ public class PokemonFactory implements IPokemonFactory {
         JsonObject jsonObject = null;
         try
 		{
-            jsonObject = getStats(index + 1, cp, dust);
+            jsonObject = recupStats(index + 1, cp, dust);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(jsonObject.toString());
+  
         JsonArray stats = jsonObject.get("stats").getAsJsonArray();
         return new Pokemon( index,
                 jsonObject.get("pokemon").getAsJsonArray().get(0).toString().replace("\"", ""),
@@ -39,35 +39,7 @@ public class PokemonFactory implements IPokemonFactory {
                 );
     }
 
-    private JsonObject getStats(int index, int cp, int dust) throws Exception {
-        String urlParameters = "p=" + index +
-                "&dust%5B%5D=" + dust +
-                "&ct=true" +
-                "&ev=false" +
-                "&cp%5B%5D=" + cp +
-                "&v=3";
-        URL obj = new URL(base_url);
-        HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
-        con.setRequestMethod("POST");
-        con.setRequestProperty("User-Agent", USER_AGENT);
-        con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
-        con.setDoOutput(true);
-        DataOutputStream wr = new DataOutputStream(con.getOutputStream());
-        wr.writeBytes(urlParameters);
-        wr.flush();
-        wr.close();
-        int responseCode = con.getResponseCode();
-        System.out.println("\nSending 'POST' request to URL : " + base_url);
-        System.out.println("Post parameters : " + urlParameters);
-        System.out.println("Response Code : " + responseCode);
-        JsonParser jp = new JsonParser();
-        JsonElement root = null;
-        try {
-            root = jp.parse(new InputStreamReader(con.getInputStream()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return root.getAsJsonObject();
-
+    private JsonObject recupStats(int index, int cp, int dust) throws Exception {
+        // TODO
     }
 }
