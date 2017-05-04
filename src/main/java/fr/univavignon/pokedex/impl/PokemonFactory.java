@@ -53,12 +53,11 @@ public class PokemonFactory implements IPokemonFactory {
         URL obj = new URL(base_url);
         HttpsURLConnection con = (HttpsURLConnection) obj.openConnection();
 
-        //add reuqest header
         con.setRequestMethod("POST");
         con.setRequestProperty("User-Agent", USER_AGENT);
         con.setRequestProperty("Accept-Language", "en-US,en;q=0.5");
 
-        // Send post request
+
         con.setDoOutput(true);
         DataOutputStream wr = new DataOutputStream(con.getOutputStream());
         wr.writeBytes(urlParameters);
@@ -79,7 +78,6 @@ public class PokemonFactory implements IPokemonFactory {
             e.printStackTrace();
         }
 
-        //print result
         return root.getAsJsonObject();
 
     }

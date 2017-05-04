@@ -9,17 +9,16 @@ import java.util.Comparator;
 import java.util.List;
 
 
+
 public class Pokedex implements IPokedex, Serializable {
     private List<Pokemon> list;
     private transient IPokemonMetadataProvider metadataProvider;
     private transient IPokemonFactory pokemonFactory;
 
     Pokedex() {
-        try 
-		{
+        try {
             this.read();
-        } catch (IOException | ClassNotFoundException e) 
-		{
+        } catch (IOException | ClassNotFoundException e) {
             this.list = new ArrayList<>();
         } finally {
             this.metadataProvider = null;
@@ -48,32 +47,28 @@ public class Pokedex implements IPokedex, Serializable {
     private void save() {
         ObjectOutputStream oos = null;
 
-        try 
-		{
+        try {
             oos = new ObjectOutputStream(new FileOutputStream("Pokedex.ser"));
             oos.writeObject(this);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try 
-			{
+            try {
                 if (oos != null) {
                     oos.close();
                 }
-            } catch (IOException e) 
-			{
+            } catch (IOException e) {
                 e.printStackTrace();
             }
         }
     }
 
     private void read() throws IOException, ClassNotFoundException {
-	    try 
-		{
-			FileInputStream fis = new FileInputStream("Pokedex.ser");
-			ObjectInputStream ois = new ObjectInputStream(fis);
-			Pokedex tmp = (Pokedex) ois.readObject();
-			this.list = new ArrayList<>(tmp.list);
+        FileInputStream fis = new FileInputStream("Pokedex.ser");
+        ObjectInputStream ois = new ObjectInputStream(fis);
+        Pokedex tmp = (Pokedex) ois.readObject();
+        this.list = new ArrayList<>(tmp.list);
+        try {
             ois.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -82,15 +77,12 @@ public class Pokedex implements IPokedex, Serializable {
 
     @Override
     public Pokemon getPokemon(int id) throws PokedexException {
-        Pokemon pok = null;
-        try 
-		{
-		    pok = this.list.get(id);
-        } catch (IndexOutOfBoundsException e) 
-		{
+        Pokemon pok;
+        try {
+            pok = this.list.get(id);
+        } catch (IndexOutOfBoundsException e) {
             throw new PokedexException("Invalid index");
         }
-		
         return pok;
     }
 
