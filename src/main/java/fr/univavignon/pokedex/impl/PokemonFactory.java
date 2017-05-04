@@ -11,19 +11,13 @@ import javax.net.ssl.HttpsURLConnection;
 import java.io.*;
 import java.net.URL;
 
-/**
- * Created by klovelace on 4/24/17.
- * PROJECT: pokedex
- * PACKAGE: fr.univavignon.pokedex.impl
- */
+
 
 public class PokemonFactory implements IPokemonFactory {
     private final String base_url = "https://pokemon.gameinfo.io/en/tools/iv-calculator";
     private final String USER_AGENT = "Mozilla/5.0";
 
-    /**
-     * {@inheritDoc}
-     **/
+
     @Override
     public Pokemon createPokemon(int index, int cp, int hp, int dust, int candy) {
         JsonObject jsonObject = null;

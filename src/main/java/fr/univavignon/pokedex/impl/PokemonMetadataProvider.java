@@ -15,64 +15,41 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
-/**
- * Created by klovelace on 4/5/17.
- * PROJECT: pokedex
- * PACKAGE: fr.univavignon.pokedex.api
- */
 
 public class PokemonMetadataProvider implements IPokemonMetadataProvider {
-
     private JsonArray data = null;
 
-    /**
-     * {@inheritDoc}
-     **/
     @Override
     public PokemonMetadata getPokemonMetadata(int index) throws PokedexException {
-        if (this.data == null)
-            this.parseData();
+        if (this.data == null)this.parseData();
 
         JsonObject pokemon;
-        try {
+		
+        try 
+		{
             pokemon = data.get(index).getAsJsonObject();
         } catch(IndexOutOfBoundsException e) {
-            throw new PokedexException("No Pokemon at this index!");
+            throw new PokedexException("MISSINGNO");
         }
-
-        return new PokemonMetadata(
-                index,
-                pokemon.get("Name").getAsString(),
-                pokemon.get("BaseAttack").getAsInt(),
-                pokemon.get("BaseDefense").getAsInt(),
-                pokemon.get("BaseStamina").getAsInt()
-        );
+        return new PokemonMetadata(index,pokemon.get("Name").getAsString(),pokemon.get("BaseAttack").getAsInt(),pokemon.get("BaseDefense").getAsInt(),pokemon.get("BaseStamina").getAsInt());
     }
 
     private void parseData() {
         HttpURLConnection request = null;
         URL url = null;
 
-        // Connect to the URL using java's native library
-        try {
-            String url1 = "https://raw.githubusercontent.com/PokemonGoF/PokemonGo-Bot/master/data/pokemon.json";
-            url = new URL(url1);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        try {
-            request = (HttpURLConnection) url.openConnection();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            request.connect();
-        } catch (IOException e) {
+        try 
+		{
+            String res = "https://raw.githubusercontent.com/PokemonGoF/PokemonGo-Bot/master/data/pokemon.json";
+            url = new URL(res);
+			request = (HttpURLConnection) url.openConnection();
+			request.connect();
+        } catch (MalformedURLException | IOException | e) 
+		{
             e.printStackTrace();
         }
 
-        // Convert to a JSON object to get data
-        JsonParser jp = new JsonParser(); //from gson
+        JsonParser jp = new JsonParser(); 
         JsonElement root = null;
         try {
             root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
