@@ -8,11 +8,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-/**
- * Created by klovelace on 4/30/17.
- * PROJECT: pokedex
- * PACKAGE: fr.univavignon.pokedex.impl
- */
 
 public class Pokedex implements IPokedex, Serializable {
     private List<Pokemon> list;
@@ -20,9 +15,11 @@ public class Pokedex implements IPokedex, Serializable {
     private transient IPokemonFactory pokemonFactory;
 
     Pokedex() {
-        try {
+        try 
+		{
             this.read();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException | ClassNotFoundException e) 
+		{
             this.list = new ArrayList<>();
         } finally {
             this.metadataProvider = null;
@@ -51,28 +48,32 @@ public class Pokedex implements IPokedex, Serializable {
     private void save() {
         ObjectOutputStream oos = null;
 
-        try {
+        try 
+		{
             oos = new ObjectOutputStream(new FileOutputStream("Pokedex.ser"));
             oos.writeObject(this);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
-            try {
+            try 
+			{
                 if (oos != null) {
                     oos.close();
                 }
-            } catch (IOException e) {
+            } catch (IOException e) 
+			{
                 e.printStackTrace();
             }
         }
     }
 
     private void read() throws IOException, ClassNotFoundException {
-        FileInputStream fis = new FileInputStream("Pokedex.ser");
-        ObjectInputStream ois = new ObjectInputStream(fis);
-        Pokedex tmp = (Pokedex) ois.readObject();
-        this.list = new ArrayList<>(tmp.list);
-        try {
+	    try 
+		{
+			FileInputStream fis = new FileInputStream("Pokedex.ser");
+			ObjectInputStream ois = new ObjectInputStream(fis);
+			Pokedex tmp = (Pokedex) ois.readObject();
+			this.list = new ArrayList<>(tmp.list);
             ois.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -81,12 +82,15 @@ public class Pokedex implements IPokedex, Serializable {
 
     @Override
     public Pokemon getPokemon(int id) throws PokedexException {
-        Pokemon pok;
-        try {
-            pok = this.list.get(id);
-        } catch (IndexOutOfBoundsException e) {
+        Pokemon pok = null;
+        try 
+		{
+		    pok = this.list.get(id);
+        } catch (IndexOutOfBoundsException e) 
+		{
             throw new PokedexException("Invalid index");
         }
+		
         return pok;
     }
 

@@ -44,7 +44,7 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
             url = new URL(res);
 			request = (HttpURLConnection) url.openConnection();
 			request.connect();
-        } catch (MalformedURLException | IOException | e) 
+        } catch (MalformedURLException | IOException e) 
 		{
             e.printStackTrace();
         }
