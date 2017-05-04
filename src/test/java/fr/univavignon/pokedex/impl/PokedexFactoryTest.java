@@ -1,6 +1,6 @@
 package fr.univavignon.pokedex.impl;
 
-import fr.univavignon.pokedex.api.IPokemonTrainerFactoryTest;
+import fr.univavignon.pokedex.api.IPokedexFactoryTest;
 import org.junit.Before;
 
 import static org.junit.Assert.*;
@@ -11,11 +11,10 @@ import static org.junit.Assert.*;
  * PACKAGE: fr.univavignon.pokedex.impl
  */
 
-public class PokemonTrainerFactoryTest extends IPokemonTrainerFactoryTest {
+public class PokedexFactoryTest extends IPokedexFactoryTest {
     @Before
     public void setUp() {
         pokedexFactory = new PokedexFactory();
-        pokemonTrainerFactory = new PokemonTrainerFactory();
     }
 
 }

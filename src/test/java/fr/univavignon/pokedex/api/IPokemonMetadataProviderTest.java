@@ -31,7 +31,7 @@ public class IPokemonMetadataProviderTest {
                         118,
                         90));
         when(pokemonMetadataProvider.getPokemonMetadata(2000))
-                .thenThrow(new PokedexException("Le professeur Castillo déclare que ce Pokemon est inconnu !"));
+                .thenThrow(new PokedexException("No pokemon at this index"));
     }
 
     @Test
