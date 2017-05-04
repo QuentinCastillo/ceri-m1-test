@@ -77,11 +77,11 @@ public class Pokedex implements IPokedex, Serializable {
 
     @Override
     public Pokemon getPokemon(int id) throws PokedexException {
-        Pokemon pok;
+        Pokemon pok = null;
         try {
             pok = this.list.get(id);
         } catch (IndexOutOfBoundsException e) {
-            throw new PokedexException("Invalid index");
+            throw new PokedexException("MISSINGNO");
         }
         return pok;
     }
