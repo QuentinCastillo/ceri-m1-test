@@ -27,7 +27,8 @@ public class IPokedexFactoryTest {
     protected static IPokemonFactory pokemonFactory;
 
     @Before
-    public void setUp() {
+    public void setUp() 
+	{
         MockitoAnnotations.initMocks(this);
         IPokedex mockPokedex = mock(IPokedex.class);
         when(pokedexFactory.createPokedex(pokemonMetadataProvider, pokemonFactory))
@@ -37,7 +38,6 @@ public class IPokedexFactoryTest {
     @Test
     public void testCreatePokedex() {
         IPokedex newPokedex = pokedexFactory.createPokedex(pokemonMetadataProvider, pokemonFactory);
-        //not null
         assertNotNull(newPokedex);
     }
 }

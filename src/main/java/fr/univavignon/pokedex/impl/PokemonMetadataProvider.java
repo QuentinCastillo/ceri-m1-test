@@ -44,18 +44,13 @@ public class PokemonMetadataProvider implements IPokemonMetadataProvider {
             url = new URL(res);
 			request = (HttpURLConnection) url.openConnection();
 			request.connect();
-        } catch (MalformedURLException | IOException e) 
+			JsonParser jp = new JsonParser(); 
+			JsonElement root = null;
+			root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
+			data = root.getAsJsonArray();
+        } catch (IOException e) 
 		{
             e.printStackTrace();
         }
-
-        JsonParser jp = new JsonParser(); 
-        JsonElement root = null;
-        try {
-            root = jp.parse(new InputStreamReader((InputStream) request.getContent()));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        data = root.getAsJsonArray();
     }
 }
