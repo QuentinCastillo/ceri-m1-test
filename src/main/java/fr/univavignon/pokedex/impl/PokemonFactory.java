@@ -41,5 +41,6 @@ public class PokemonFactory implements IPokemonFactory {
 
     private JsonObject recupStats(int index, int cp, int dust) throws Exception {
         // TODO
+		return null;
     }
 }
